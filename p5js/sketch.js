@@ -1,52 +1,85 @@
-let leftscore = 0
-let rightscore = 0
-let paddle_speed = 21
+let LeftScore = 0
+let RightScore = 0
+
+let isLeft = true
+let isRight = !isLeft
+
+let Paddle_SPEED = 21
 
 function setup() {
-    createCanvas(1200, 800)
+    createCanvas(900, 600)
     ball = new Ball()
-    left = new Paddle(true)
-    right = new Paddle(false)
+    Left = new Paddle(isLeft)
+    Right = new Paddle(isRight)
 }
 
 function draw() {
-    background(0)
+    background('#0f0f0f')
+    textFont('Georgia')
 
-    ball.checkPaddleRight(right)
-    ball.checkPaddleLeft(left)
+    ball.DoesItHitThePaddleRight (Right)
+    ball.DoesItHitThePaddleLeft (Left)
 
-    left.show()
-    right.show()
-    left.update()
-    right.update()
+    Left.Show()
+    Right.Show()
+    Left.Update()
+    Right.Update()
 
-    ball.update()
-    ball.edges()
-    ball.show()
+    ball.Update()
+    ball.HitCeilFloor()
+    ball.Show()
 
     fill(255)
     textSize(32)
-    text(leftscore, 32, 40)
-    text(rightscore, width - 64, 40)
+    text(LeftScore, 128, 40)
+    text(RightScore, width - 128, 40)
 }
 
-function keyReleased() {
-    left.move(0)
-    right.move(0)
+
+function keyReleased () {
+
+    Left.move(0)
+    Right.move(0)
 }
 
-function keyPressed() {
-    console.log(key)
-    if (key == "w") {
-        left.move(-paddle_speed)
-    } else if (key == "s") {
-        left.move(paddle_speed)
+
+function keyPressed () {
+
+    // console.log(key)
+    if (keyIsDown(87)) { // UP Left
+        Left.move(-Paddle_SPEED)
     }
 
-    if (key == "ArrowUp") {
-        right.move(-paddle_speed)
-    } else if (key == "ArrowDown") {
-        right.move(paddle_speed)
+    if (keyIsDown(83)) { // DOWN Left
+        Left.move(Paddle_SPEED)
+    }
+
+    if (keyIsDown(73)) { // UP R
+        Right.move(-Paddle_SPEED)
+    }
+
+    if (keyIsDown(75)) { // DOWN R
+        Right.move(Paddle_SPEED)
     }
 }
 
+/*
+const keyPressed = () => {
+    // console.log(key)
+    //if (key == "w") {
+    if (keyIsDown(87)) {
+        Left.move(-Paddle_SPEED)
+    // } else if (key == "s") {
+    } else if (keyIsDown(83)) {
+        Left.move(Paddle_SPEED)
+    }
+
+    // if (key == "ArrowUp") {
+    if (keyIsDown(UP_ARROW)) {
+        Right.move(-Paddle_SPEED)
+    // } else if (key == "ArrowDown") {
+    } else if (keyIsDown(DOWN_ARROW)) {
+        Right.move(Paddle_SPEED)
+    }
+}
+*/

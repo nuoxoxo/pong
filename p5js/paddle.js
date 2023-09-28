@@ -1,9 +1,13 @@
 class Paddle {
+
     constructor(isLeft) {
+
+        this.x = undefined
         this.y = height / 2
-        this.w = 20
-        this.h = 188
-        this.ychange = 0
+        this.w = 21
+        this.h = 112
+        this.deltaY = 0
+        this.offset = this.h / 2 - random() * 3
         this.isleft = isLeft
 
         if (isLeft) {
@@ -13,20 +17,32 @@ class Paddle {
         }
     }
 
-    update() {
-        this.y += this.ychange
-        this.y = constrain(this.y, this.h / 2, height - this.h / 2)
+
+    Update() {
+
+        this.y += this.deltaY
+        this.y = constrain(
+            this.y, 
+            this.h - this.offset , 
+            height - this.h + this.offset
+        )
     }
 
-    move(steps) {
-        this.ychange = steps
+
+    move(SPEED) {
+
+        this.deltaY = SPEED
     }
 
-    show() {
-        if (this.isleft)
-            fill('rgba(0, 255, 0, 0.25)')
-        else
-            fill('rgba(100%, 0%, 100%, 0.5)')
+
+    Show() {
+
+        fill(
+            this.isleft
+            ? 'rgba(0, 255, 0, 0.25)'
+            : 'rgba(100%, 0%, 100%, 0.5)'
+        )
+
         rectMode(CENTER)
         rect(this.x, this.y, this.w, this.h)
     }
