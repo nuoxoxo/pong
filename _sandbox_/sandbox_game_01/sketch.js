@@ -7,7 +7,6 @@ let isRight = !isLeft
 let Paddle_SPEED = 21
 
 function setup() {
-
     createCanvas(900, 600)
     ball = new Ball()
     Left = new Paddle(isLeft)
@@ -15,7 +14,6 @@ function setup() {
 }
 
 function draw() {
-
     background('#0f0f0f')
     textFont('Georgia')
 
@@ -47,7 +45,7 @@ function keyReleased () {
 
 function keyPressed () {
 
-
+    // console.log(key)
     if (keyIsDown(87)) { // UP Left
         Left.MoveVertically(-Paddle_SPEED)
     }
@@ -64,3 +62,24 @@ function keyPressed () {
         Right.MoveVertically(Paddle_SPEED)
     }
 }
+
+/*
+const keyPressed = () => {
+    // console.log(key)
+    //if (key == "w") {
+    if (keyIsDown(87)) {
+        Left.MoveVertically(-Paddle_SPEED)
+    // } else if (key == "s") {
+    } else if (keyIsDown(83)) {
+        Left.MoveVertically(Paddle_SPEED)
+    }
+
+    // if (key == "ArrowUp") {
+    if (keyIsDown(UP_ARROW)) {
+        Right.MoveVertically(-Paddle_SPEED)
+    // } else if (key == "ArrowDown") {
+    } else if (keyIsDown(DOWN_ARROW)) {
+        Right.MoveVertically(Paddle_SPEED)
+    }
+}
+*/
